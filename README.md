@@ -5,11 +5,11 @@ A utility for remote or local, optionally encrypted, rolling backup using BTRFS.
 
 # TODO
 
-[ ] Back up locally (hourly)
-[ ] Back up staggered
-[ ] Back up according to config file
-[ ] Clean up backups
-[ ] Push to remote
-[ ] Push to remote encrypted
-[ ] Enable installation
-[ ] Package for various Distros
+- [ ] Back up locally (hourly)
+- [ ] Back up staggered
+- [ ] Back up according to config file
+- [ ] Clean up backups
+- [ ] Push to remote
+- [ ] Push to remote encrypted
+- [ ] Enable installation
+- [ ] Package for various Distros
