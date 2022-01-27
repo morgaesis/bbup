@@ -2,8 +2,19 @@
 
 A utility for remote or local, optionally encrypted, rolling backup using BTRFS. Only the local system needs to be on BTRFS. Having remote on BTRFS speeds up push/rollback if unencrypted.
 
+## Development
+### Prerequisites
+You will need:
+- `g++`
+- `make`
 
-# TODO
+### Building
+```shell
+make build
+```
+
+
+## TODO
 
 - [ ] Back up locally (hourly)
 - [ ] Back up staggered
