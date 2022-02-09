@@ -34,3 +34,6 @@
 # Output dirs
 build/
 dist/
+
+# Bazel outputs
+bazel-*
