@@ -1,0 +1,13 @@
+name: Build bbup
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build C++ code
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Bazelisk
+        run: npm -g install bazelisk
+      - name: Build using bazelisk
+        run: bazelisk //main:bbup
