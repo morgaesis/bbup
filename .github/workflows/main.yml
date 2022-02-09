@@ -10,4 +10,4 @@ jobs:
       - name: Set up Bazelisk
         run: npm install @bazel/bazelisk
       - name: Build using bazelisk
-        run: bazelisk //main:bbup
+        run: bazelisk build //main:bbup
