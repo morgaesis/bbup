@@ -9,9 +9,11 @@ You will need:
 - `make`
 
 ### Building
+`bazel` is used for building:
 ```shell
-make build
+bazel build //main:bbup
 ```
+Binaries appear in `./bazel-bin/main/`
 
 
 ## TODO
