@@ -11,9 +11,17 @@ You will need:
 ### Building
 `bazel` is used for building:
 ```shell
-bazel build //main:bbup
+bazel build //src:main
 ```
-Binaries appear in `./bazel-bin/main/`
+Binaries appear in `./bazel-bin/`
+
+### Testing
+Using `bazel` to test everything:
+```shell
+bazel test //src:*
+```
+#### Code Coverage
+No code coverage is currently measured. Some day this will hopefully be measured, but not for now.
 
 
 ## TODO
