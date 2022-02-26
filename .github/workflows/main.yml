@@ -1,5 +1,8 @@
 name: Build bbup
-on: [push]
+on:
+  push:
+    paths:
+    - 'src/**'
 
 jobs:
   build:
@@ -7,6 +10,11 @@ jobs:
     name: Build C++ code
     steps:
       - uses: actions/checkout@v2
+      - name: Cache bazelisk stuff
+        uses: actions/cache@v2
+        with:
+          path: bazel-*
+          key: ${{ runner.os }}-${{ hashFiles('src/') }}
       - name: Set up Bazelisk
         run: npm install @bazel/bazelisk
       - name: Build using bazelisk
