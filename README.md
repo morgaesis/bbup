@@ -21,7 +21,7 @@ Using `bazel` to test everything:
 bazel test //src:*
 ```
 #### Code Coverage
-No code coverage is currently measured. Some day this will hopefully be measured, but not for now.
+Getting code coverage for C++ seems at first to be quite complicated. Therefore, this is slated for some far future when the project is more mature.
 
 
 ## TODO
