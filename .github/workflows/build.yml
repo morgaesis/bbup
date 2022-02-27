@@ -1,0 +1,36 @@
+name: Build bbup
+on:
+  push:
+    paths:
+    - 'src/**'
+
+jobs:
+  build:
+    name: Build C++ code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache bazel outputs
+        uses: actions/cache@v2
+        with:
+          path: bazel-*
+          key: ${{ runner.os }}-${{ hashFiles('src/') }}
+      - name: Cache bazel outputs
+        uses: actions/cache@v2
+        with:
+          path: /usr/local/bin/bazel*
+          key: ${{ runner.os }}-${{ hashFiles('WORKSPACE') }}
+
+      # Bazel build, test, coverage
+      - name: Set up Bazelisk
+        run: npm install @bazel/bazelisk
+        if: 
+      - name: Build using bazelisk
+        run: bazelisk build //src:*
+      - name: Test using googletest
+        run: bazelisk test //src:*
+      - name: Publish build
+        uses: actions/upload-artifact@v2
+        with:
+          name: bbup
+          path: bazel-bin/src/bbup
