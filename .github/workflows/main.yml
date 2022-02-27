@@ -13,11 +13,45 @@ jobs:
       - name: Cache bazelisk stuff
         uses: actions/cache@v2
         with:
-          path: bazel-*
+          path: |
+            bazel-*
+            /usr/local/bin/bazel*
           key: ${{ runner.os }}-${{ hashFiles('src/') }}
+      - name: Cache CodeCov
+        id: codecov
+        uses: actions/cache@v2
+        with:
+          path: codecov*
+          key: ${{ runner.os }}-${{ hashFiles('codecov') }}
+
+      # Bazel build, test, coverage
       - name: Set up Bazelisk
         run: npm install @bazel/bazelisk
       - name: Build using bazelisk
-        run: bazelisk build //src:main
+        run: bazelisk build //src:*
       - name: Test using googletest
         run: bazelisk test //src:*
+      - name: Get code coverage
+        run: bazelisk coverage //src:*
+
+      # CodeCov
+      - name: Fetch CodeCov integrity check
+        run: |
+          curl https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import # One-time step
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
+          curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
+          gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
+          shasum -a 256 -c codecov.SHA256SUM
+        if: steps.codecov.cache-hit != 'true'
+      - name: Fetch CodeCov
+        run: curl -Os https://uploader.codecov.io/latest/linux/codecov
+        if: steps.codecov.cache-hit != 'true'
+      - name: Run CodeCov
+        run: chmod +x codecov && ./codecov
+        
+      - name: Publish build
+        uses: actions/upload-artifact@v2
+        with:
+          name: bbup
+          path: bazel-bin/src/bbup
