@@ -10,7 +10,7 @@ cc_test(
 		],
 		size = "small",
 		deps = [
-			"//src:main",
+			"//src:bbup",
 			"@googletest//:gtest_main",
 		],
 )
