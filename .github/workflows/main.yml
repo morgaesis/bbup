@@ -10,6 +10,11 @@ jobs:
     name: Build C++ code
     steps:
       - uses: actions/checkout@v2
+      - name: Cache home cache
+        uses: actions/cache@v2
+        with:
+          path: "~/.cache"
+          key: ${{ runner.os }}-${{ hashFiles("~/.cache") }}
       - name: Cache bazelisk stuff
         uses: actions/cache@v2
         with:
@@ -35,7 +40,7 @@ jobs:
         run: bazelisk coverage //src:*
 
       # CodeCov
-      - name: Fetch CodeCov integrity check
+      - name: Fetch CodeCov and check integrity
         run: |
           curl https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import # One-time step
           curl -Os https://uploader.codecov.io/latest/linux/codecov
@@ -43,9 +48,6 @@ jobs:
           curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
           gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
           shasum -a 256 -c codecov.SHA256SUM
-        if: steps.codecov.cache-hit != 'true'
-      - name: Fetch CodeCov
-        run: curl -Os https://uploader.codecov.io/latest/linux/codecov
         if: steps.codecov.cache-hit != 'true'
       - name: Run CodeCov
         run: chmod +x codecov && ./codecov
