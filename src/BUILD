@@ -1,5 +1,5 @@
 cc_binary(
-    name = "main",
+    name = "bbup",
     srcs = ["main.cpp", "hello.h"],
 )
 
