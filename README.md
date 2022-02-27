@@ -23,7 +23,7 @@ Using `bazel` to test everything:
 bazel test //src:*
 ```
 #### Code Coverage
-Getting code coverage for C++ seems at first to be quite complicated. Therefore, this is slated for some far future when the project is more mature.
+Code coverage is found with `bazel coverage //src:*`, and is published to [CodeCov](https://app.codecov.io/gh/morgaesis/bbup). The coverage is published as a badge at the top of this README as well.
 
 
 ## TODO
