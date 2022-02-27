@@ -14,11 +14,6 @@ jobs:
       BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v2
-      - name: Cache home cache
-        uses: actions/cache@v2
-        with:
-          path: "$HOME/.cache"
-          key: ${{ runner.os }}-${{ hashFiles("$HOME/.cache") }}
       - name: Cache bazelisk stuff
         uses: actions/cache@v2
         with:
