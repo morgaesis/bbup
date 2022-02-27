@@ -1,5 +1,5 @@
-![Build Status](https://github.com/morgaesis/bbup/actions/workflows/main.yml/badge.svg)
-# BBup – Btfrs Backup utility
+![Build Status](https://github.com/morgaesis/bbup/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/morgaesis/bbup/branch/main/graph/badge.svg?token=0K9F6XVA6S)](https://codecov.io/gh/morgaesis/bbup)
+# BBup – Btfrs Backup utility 
 
 A utility for remote or local, optionally encrypted, rolling backup using BTRFS. Only the local system needs to be on BTRFS. Having remote on BTRFS speeds up push/rollback if unencrypted.
 
