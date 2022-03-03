@@ -1,6 +1,7 @@
 cc_binary(
     name = "bbup",
-    srcs = ["main.cpp", "hello.h"],
+    srcs = ["bbup.cpp", "hello.h"],
+	deps = ["@boost//:program_options"],
 )
 
 cc_test(
