@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/program_options.hpp>
+#include <string>
 
 namespace po = boost::program_options;
 
@@ -19,6 +20,8 @@ int main(int argc, char* argv[]) {
 	int remote_n_week;
 	int remote_n_month;
 	int remote_n_year;
+	bool encrypt;
+	std::string encrypt_pass;
 
 	desc.add_options()
 		("help", "Show this help message")
@@ -34,6 +37,8 @@ int main(int argc, char* argv[]) {
 		("remote-n-week", po::value<int>(&remote_n_week)->default_value(5), "Number of weekly backups to store (remotely)")
 		("remote-n-month", po::value<int>(&remote_n_month)->default_value(12), "Number of monthly backups to store (remotely)")
 		("remote-n-year", po::value<int>(&remote_n_year)->default_value(3), "Number of yearly backups to store (remotely)")
+		("encrypt", po::value<bool>(&encrypt)->default_value(false), "Number of yearly backups to store (remotely)")
+		("encrypt-pass", po::value<std::string>(&encrypt_pass)->default_value(""), "Number of yearly backups to store (remotely)")
 	;
 	po::variables_map options;
 	std::cout << "Parsing options" << std::endl;
