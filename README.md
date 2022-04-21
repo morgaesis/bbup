@@ -17,6 +17,8 @@ bazel build //src:main
 ```
 Binaries appear in `./bazel-bin/`
 
+> If you are getting [`Read-only filesystem` errors](https://github.com/bazelbuild/bazel/issues/12124) try running with the `--spawn_strategy=standalone` option.
+
 ### Testing
 Using `bazel` to test everything:
 ```shell
