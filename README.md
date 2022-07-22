@@ -1,40 +1,43 @@
 ![Build Status](https://github.com/morgaesis/bbup/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/morgaesis/bbup/branch/main/graph/badge.svg?token=0K9F6XVA6S)](https://codecov.io/gh/morgaesis/bbup)
 # BBup – Btfrs Backup utility 
 
-A utility for remote or local, optionally encrypted, rolling backup using BTRFS. Only the local system needs to be on BTRFS. Having remote on BTRFS speeds up push/rollback if unencrypted.
+A utility for remote or local, optionally encrypted, rolling backup using BTRFS or rsync. Using BTRFS speeds up each backup/restore and decreases disk usage on backup node.
 
 ## Development
 ### Prerequisites
 You will need:
-- `g++`
-- `googletest`
-- `bazel/bazelisk`
+- `Cargo`
+- `Rust`
+- `Rsync`
+- `BTRFS`
 
 ### Building
-`bazel` is used for building:
+`cargo` is used for building:
 ```shell
-bazel build //src:main
+cargo build
 ```
-Binaries appear in `./bazel-bin/`
-
-> If you are getting [`Read-only filesystem` errors](https://github.com/bazelbuild/bazel/issues/12124) try running with the `--spawn_strategy=standalone` option.
+Binaries appear in `target/`
 
 ### Testing
-Using `bazel` to test everything:
+Using `cargo` to test everything:
 ```shell
-bazel test //src:*
+cargo test
 ```
 #### Code Coverage
-Code coverage is found with `bazel coverage //src:*`, and is published to [CodeCov](https://app.codecov.io/gh/morgaesis/bbup). The coverage is published as a badge at the top of this README as well.
+> See the [Rust code-coverage documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html) for more details.
+Code coverage is found with the `instrument-coverage` build flag. The code coverage in the CI pipeligen is published to [CodeCov](https://app.codecov.io/gh/morgaesis/bbup) and is visible as a badge at the top of this README as well.
+```
+cargo clean
+RUSTFLAGS="-C instrument-coverage" cargo build
+```
 
-
-## TODO
-
-- [ ] Back up locally (hourly)
-- [ ] Back up staggered
-- [ ] Back up according to config file
-- [ ] Clean up backups
-- [ ] Push to remote
-- [ ] Push to remote encrypted
-- [ ] Enable installation
-- [ ] Package for various Distros
+## Priorities
+1. Basic push backup with `rsync`
+2. Design config format
+3. Scheduling from config
+4. System wide installation with Systemd timer files
+5. Pruning on backup node during backup
+6. Add `btrfs` backend in addition to `rsync`
+7. Polling backup on backup node
+8. Encryption at rest
+9. Encryption in transit
