@@ -32,12 +32,15 @@ RUSTFLAGS="-C instrument-coverage" cargo build
 ```
 
 ## Priorities
-1. Basic push backup with `rsync`
-2. Design config format
-3. Scheduling from config
-4. System wide installation with Systemd timer files
-5. Pruning on backup node during backup
-6. Add `btrfs` backend in addition to `rsync`
-7. Polling backup on backup node
-8. Encryption at rest
-9. Encryption in transit
+Here follows as list of what is to come and what has been completed. The list is ordered by importance and order of implementation.
+
+[ ] Local backup with `rsync`
+[ ] Basic push backup with `rsync`
+[ ] Design config format
+[ ] Scheduling from config
+[ ] System wide installation with Systemd timer files
+[ ] Pruning on backup node during backup
+[ ] Add `btrfs` backend in addition to `rsync`
+[ ] Polling backup on backup node
+[ ] Encryption at rest
+[ ] Encryption in transit
